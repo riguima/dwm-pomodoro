@@ -5,10 +5,11 @@ pomodoro_timer=30
 if [[ $@ == *"--long"* ]]; then pomodoro_timer=45; fi
 
 start-timer() {
-  for (( i = 0; i < $pomodoro_timer; i++)); do
-    current_title="$(xprop -root -notype -f WM_NAME '8u' | sed -n -r 's/WM_NAME = \"(.*)\"/\1/p')"
-    xsetroot -name "$i $current_title"
-    sleep 1m
+  for (( i = $pomodoro_timer; i > 0; i--)); do
+    for (( j = 59; j > 0; j--)); do
+      xsetroot -name "$i:$j"
+      sleep 1s
+    done
   done
 }
 
