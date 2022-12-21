@@ -2,14 +2,16 @@
 
 pomodoro_timer=30
 
-if [[ $1 = "start" ]]; then
-  current_title="$(xprop -root -notype -f WM_NAME '8u' | sed -n -r 's/WM_NAME = \"(.*)\"/\1/p')"
-  while $pomodoro_timer = 0
-    xsetroot -name ""
-    sleep 1m &
-fi
+if [[ $@ == *"--long"* ]]; then pomodoro_timer=45; fi
 
-if [[ $long -eq -1 ]]; then
-  echo works
-  pomodoro_timer=45
+start-timer() {
+  for (( i = 0; i < $pomodoro_timer; i++)); do
+    current_title="$(xprop -root -notype -f WM_NAME '8u' | sed -n -r 's/WM_NAME = \"(.*)\"/\1/p')"
+    xsetroot -name "$i $current_title"
+    sleep 1m
+  done
+}
+
+if [[ $1 = "start" ]]; then
+  start-timer &
 fi
