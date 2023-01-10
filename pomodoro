@@ -1,10 +1,11 @@
 #!/bin/bash
 
-pomodoro_timer=30
+format-to-time() {
+}
 
-if [[ $@ == *"--long"* ]]; then pomodoro_timer=45; fi
-
-start-timer() {
+start() {
+  pomodoro_timer=30
+  if [[ $@ == *"--long"* ]]; then pomodoro_timer=45; fi
   for (( i = $pomodoro_timer; i > 0; i--)); do
     for (( j = 59; j > 0; j--)); do
       xsetroot -name "$i:$j"
@@ -13,6 +14,4 @@ start-timer() {
   done
 }
 
-if [[ $1 = "start" ]]; then
-  start-timer &
-fi
+"$@"
