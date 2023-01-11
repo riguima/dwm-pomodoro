@@ -1,7 +1,9 @@
 #!/bin/bash
 
 format-to-time() {
-  echo "02:04"
+  minutes=$(printf "%02d" $1)
+  seconds=$(printf "%02d" $2)
+  echo "$minutes:$seconds"
 }
 
 start() {
