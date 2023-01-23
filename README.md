@@ -1,5 +1,6 @@
 # dwm-pomodoro
-Simple pomodoro timer for use with dwm, timer appear in topbar
+
+Simple pomodoro timer for use with [dwm](https://github.com/sr/dwm), timer appear in topbar
 
 ## Use
 
