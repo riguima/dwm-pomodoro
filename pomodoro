@@ -7,16 +7,22 @@ format-to-time() {
 }
 
 start-timer() {
-  start = $SECONDS
-  while [ $((SECONDS - start / 60)) -ne $1 ]; do
-    xsetroot -name $(format-to-time $((SECONDS - start / 60)))
+  minutes=$1
+  seconds=$2
+  while [[ $minutes -ne 0 || $seconds -ne 0 ]]; do
+    xsetroot -name $(format-to-time $minutes $seconds)
+    if [[ $seconds -eq 0 ]]; then
+      ((minutes--))
+      seconds=60
+    fi
+    ((seconds--))
     sleep 1s
   done
 }
 
-start-pomodoro() {
-  if [[ $@ == *"--long"* ]]; then start-timer 45; else start-timer 25; fi
-  if [[ $@ == *"--long"* ]]; then start-timer 10; else start-timer 5; fi
+start() {
+  start-timer 1 0
+  if [[ $@ == *"--long"* ]]; then start-timer 15 0 else; start-timer 5 0; fi
 }
 
 "$@"
