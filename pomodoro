@@ -21,7 +21,7 @@ start-timer() {
 }
 
 start() {
-  start-timer 1 0
+  start-timer 25 0
   if [[ $@ == *"--long"* ]]; then start-timer 15 0 else; start-timer 5 0; fi
 }
 
